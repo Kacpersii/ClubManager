@@ -9,38 +9,18 @@ namespace ClubManager.Models
     public class Player
     {
         public int ID { get; set; }
-
-        [Display(Name = "Nazwa użytkownika")]
-        [Required]
-        [StringLength(50, MinimumLength = 2)]
-        public string UserName { get; set; }
-
-        [Display(Name = "Imię")]
-        [Required]
-        [StringLength(25, MinimumLength = 1)]
-        public string FirstName { get; set; }
-
-        [Display(Name = "Nazwisko")]
-        [Required]
-        [StringLength(25, MinimumLength = 1)]
-        public string LastName { get; set; }
-
-        [Display(Name = "Data urodzenia")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime BirthDate { get; set; }
-
-        [Display(Name = "Numer telefonu")]
-        [Required]
-        [StringLength(9, MinimumLength = 9)]
-        public string PhoneNumber { get; set; }
-        public LeadingLeg LeadingLeg { get; set; }
-        public int ClubID { get; set; }
+        public int UserID { get; set; }
         public int TeamID { get; set; }
+        public LeadingLeg LeadingLeg { get; set; }
+        public int Height { get; set; }
+        public int Weight { get; set; }
+        public int ShirtsNumber { get; set; }
+        public string MainPosition { get; set; }
+        public string SecondPosition { get; set; }
 
-        
-        public virtual Club Club { get; set; }
+        public virtual User User { get; set; }
         public virtual Team Team { get; set; }
+        public virtual List<Club> PreviousClubs { get; set; }
 
     }
 
@@ -50,4 +30,5 @@ namespace ClubManager.Models
         Right,
         Both
     }
+
 }
