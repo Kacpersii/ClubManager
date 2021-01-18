@@ -10,30 +10,31 @@ namespace ClubManager.Models
     {
         public int ID { get; set; }
 
-        [Display(Name = "Email")]
         [Required]
-        [StringLength(50, MinimumLength = 2)]
+        [Display(Name = "Email")]
         public string UserName { get; set; }
 
-        [Display(Name = "Imię")]
         [Required]
-        [StringLength(25, MinimumLength = 1)]
+        [Display(Name = "Imię")]
         public string FirstName { get; set; }
 
-        [Display(Name = "Nazwisko")]
         [Required]
-        [StringLength(25, MinimumLength = 1)]
+        [Display(Name = "Nazwisko")]
         public string LastName { get; set; }
 
+        [Required]
         [Display(Name = "Data urodzenia")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd.MM.yyyy}", ApplyFormatInEditMode = true)]
         public DateTime BirthDate { get; set; }
 
-        [Display(Name = "Numer telefonu")]
         [Required]
-        [StringLength(9, MinimumLength = 9)]
+        [Display(Name = "Numer telefonu")]
         public string PhoneNumber { get; set; }
+
+        [Required]
+        [Display(Name = "Zdjęcie")]
+        public int Photo { get; set; }
 
         public int ClubID { get; set; }
 

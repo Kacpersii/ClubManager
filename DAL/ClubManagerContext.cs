@@ -25,6 +25,10 @@ namespace ClubManager.DAL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
+            modelBuilder.Entity<Player>().HasRequired<User>(p => p.User)
+                .WithMany()
+                .WillCascadeOnDelete(false);
         }
     }
 }

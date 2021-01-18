@@ -12,7 +12,6 @@ namespace ClubManager.Models
 
         public virtual User User { get; set; }
         public virtual List<Team> Teams { get; set; }
-        public virtual List<Club> PreviousClubs { get; set; }
         public virtual List<string> Courses { get; set; }
 
     }

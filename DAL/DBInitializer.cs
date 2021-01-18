@@ -60,11 +60,9 @@ namespace ClubManager.DAL
 
             var clubs = new List<Club>
             {
-                new Club { Name = "FC Warszawa" },
+                new Club { Name = "FC Warszawa",  },
                 new Club { Name = "Pogoń Lublin" }
             };
-            clubs.ForEach(c => context.Clubs.Add(c));
-            context.SaveChanges();
 
             var users = new List<User>
             {
@@ -79,8 +77,9 @@ namespace ClubManager.DAL
             users.ForEach(u => context.Users.Add(u));
             context.SaveChanges();
 
-            context.Clubs.Single(c => c.ID == 0).ManagerID = users[0].ID;
-            context.Clubs.Single(c => c.ID == 1).ManagerID = users[1].ID;
+            clubs[0].Managers.Add(users[0]);
+            clubs[1].Managers.Add(users[1]);
+            clubs.ForEach(c => context.Clubs.Add(c));
             context.SaveChanges();
 
             var coaches = new List<Coach>
