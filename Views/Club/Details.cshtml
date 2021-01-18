@@ -36,6 +36,11 @@
 
     </dl>
 </div>
+@Model.Players.Count()
+@foreach (var item in Model.Players)
+{
+    <p>@item.User.UserName</p>
+}
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Back to List", "Index")

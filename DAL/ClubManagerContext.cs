@@ -29,6 +29,18 @@ namespace ClubManager.DAL
             modelBuilder.Entity<Player>().HasRequired<User>(p => p.User)
                 .WithMany()
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Team>().HasRequired<Coach>(t => t.Coach)
+                .WithMany(c => c.Teams).HasForeignKey(t => t.CoachID)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Player>().HasRequired<Team>(p => p.Team)
+                .WithMany(t => t.Players).HasForeignKey(p => p.TeamID)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<User>().HasRequired<Club>(u => u.Club)
+                .WithMany(c => c.Managers).HasForeignKey(u => u.ClubID)
+                .WillCascadeOnDelete(false);
         }
     }
 }

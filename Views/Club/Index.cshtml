@@ -4,10 +4,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Kluby</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Dodaj nowy klub", "Create", new { }, new { @class = "btn btn-success" })
 </p>
 <table class="table">
     <tr>
@@ -17,29 +17,32 @@
         <th>
             @Html.DisplayNameFor(model => model.Stadium)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Logo)
-        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Stadium)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Logo)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @if(item.Logo != null)
+                {
+                    <img src="~/Images/Logos/FC Warszawa.jpg" alt="@item.Name logo" width="30" height="30"/>
+                } else
+                {
+                    <i class="far fa-futbol club-logo-icon-mini"></i>
+                }
+
+                
+                @Html.ActionLink(item.Name, "Details", new { id = item.ID })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Stadium)
+            </td>
+            <td>
+                @Html.ActionLink(" ", "Edit", new { id = item.ID }, new { @class = "fas fa-edit admin-panel-icon admin-panel-icon-edit" })
+                @Html.ActionLink(" ", "Delete", new { id = item.ID }, new { @class = "fas fa-trash admin-panel-icon admin-panel-icon-delete" })
+            </td>
+        </tr>
+    }
 
 </table>

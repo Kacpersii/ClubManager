@@ -60,9 +60,11 @@ namespace ClubManager.DAL
 
             var clubs = new List<Club>
             {
-                new Club { Name = "FC Warszawa",  },
+                new Club { Name = "FC Warszawa", Logo = "FC Warszawa.jpg" },
                 new Club { Name = "Pogoń Lublin" }
             };
+            clubs.ForEach(c => context.Clubs.Add(c));
+            context.SaveChanges();
 
             var users = new List<User>
             {
@@ -79,31 +81,32 @@ namespace ClubManager.DAL
 
             clubs[0].Managers.Add(users[0]);
             clubs[1].Managers.Add(users[1]);
-            clubs.ForEach(c => context.Clubs.Add(c));
+            context.Entry(clubs[0]).State = EntityState.Modified;
+            context.Entry(clubs[1]).State = EntityState.Modified;
             context.SaveChanges();
 
             var coaches = new List<Coach>
             {
-                new Coach { UserID = users[2].ID },
-                new Coach { UserID = users[3].ID }
+                new Coach { UserID = users[2].ID, ClubID = users[2].ClubID },
+                new Coach { UserID = users[3].ID, ClubID = users[3].ClubID }
             };
             coaches.ForEach(c => context.Coaches.Add(c));
             context.SaveChanges();
 
             var teams = new List<Team>
             {
-                new Team { Name = clubs[0].Name, CoachID = coaches[0].ID },
-                new Team { Name = clubs[1].Name, CoachID = coaches[1].ID }
+                new Team { Name = clubs[0].Name, CoachID = coaches[0].ID, ClubID = clubs[0].ID },
+                new Team { Name = clubs[1].Name, CoachID = coaches[1].ID, ClubID = clubs[1].ID }
             };
             teams.ForEach(t => context.Teams.Add(t));
             context.SaveChanges();
 
             var players = new List<Player>
             {
-                new Player { UserID = users[2].ID, TeamID = teams[0].ID, Height = 183, Weight = 78, LeadingLeg = LeadingLeg.Right, MainPosition = "Bramkarz", ShirtsNumber = 1 },
-                new Player { UserID = users[4].ID, TeamID = teams[0].ID, Height = 187, Weight = 82, LeadingLeg = LeadingLeg.Right, MainPosition = "Napastnik", ShirtsNumber = 10 },
-                new Player { UserID = users[5].ID, TeamID = teams[0].ID, Height = 178, Weight = 73, LeadingLeg = LeadingLeg.Left, MainPosition = "Lewy Obrońca", ShirtsNumber = 2 },
-                new Player { UserID = users[6].ID, TeamID = teams[0].ID, Height = 181, Weight = 76, LeadingLeg = LeadingLeg.Both, MainPosition = "Środkowy Pomocnik", ShirtsNumber = 6 },
+                new Player { UserID = users[2].ID, ClubID = users[2].ClubID, TeamID = teams[0].ID, Height = 183, Weight = 78, LeadingLeg = LeadingLeg.Right, MainPosition = "Bramkarz", ShirtsNumber = 1 },
+                new Player { UserID = users[4].ID, ClubID = users[4].ClubID, TeamID = teams[0].ID, Height = 187, Weight = 82, LeadingLeg = LeadingLeg.Right, MainPosition = "Napastnik", ShirtsNumber = 10 },
+                new Player { UserID = users[5].ID, ClubID = users[5].ClubID, TeamID = teams[0].ID, Height = 178, Weight = 73, LeadingLeg = LeadingLeg.Left, MainPosition = "Lewy Obrońca", ShirtsNumber = 2 },
+                new Player { UserID = users[6].ID, ClubID = users[6].ClubID, TeamID = teams[0].ID, Height = 181, Weight = 76, LeadingLeg = LeadingLeg.Both, MainPosition = "Środkowy Pomocnik", ShirtsNumber = 6 },
             };
             players.ForEach(p => context.Players.Add(p));
             context.SaveChanges();

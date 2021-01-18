@@ -10,6 +10,7 @@ namespace ClubManager.Models
     {
         public int ID { get; set; }
         public int UserID { get; set; }
+        public int ClubID { get; set; }
         public int TeamID { get; set; }
         public LeadingLeg LeadingLeg { get; set; }
         public int Height { get; set; }
@@ -19,6 +20,7 @@ namespace ClubManager.Models
         public string SecondPosition { get; set; }
 
         public virtual User User { get; set; }
+        public virtual Club Club { get; set; }
         public virtual Team Team { get; set; }
 
     }

@@ -9,8 +9,10 @@ namespace ClubManager.Models
     {
         public int ID { get; set; }
         public int UserID { get; set; }
+        public int ClubID { get; set; }
 
         public virtual User User { get; set; }
+        public virtual Club Club { get; set; }
         public virtual List<Team> Teams { get; set; }
         public virtual List<string> Courses { get; set; }
 
