@@ -4,18 +4,15 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Kluby</h2>
+<h1 class="text-center">Kluby</h1>
 
 <p>
-    @Html.ActionLink("Dodaj nowy klub", "Create", new { }, new { @class = "btn btn-success" })
+    @Html.ActionLink("Dodaj nowy klub", "Create", new { }, new { @class = "btn btn-success add-new-button" })
 </p>
-<table class="table">
+<table class="table table-hover">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Stadium)
         </th>
         <th></th>
     </tr>
@@ -24,21 +21,17 @@
     {
         <tr>
             <td>
-                @if(item.Logo != null)
+                @if (item.Logo != null)
                 {
-                    <img src="~/Images/Logos/FC Warszawa.jpg" alt="@item.Name logo" width="30" height="30"/>
-                } else
+                    <img src="~/Images/Logos/@item.Logo" alt="@item.Name logo" class="club-logo-img-mini" />
+                }
+                else
                 {
                     <i class="far fa-futbol club-logo-icon-mini"></i>
                 }
-
-                
                 @Html.ActionLink(item.Name, "Details", new { id = item.ID })
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Stadium)
-            </td>
-            <td>
+            <td class="text-center">
                 @Html.ActionLink(" ", "Edit", new { id = item.ID }, new { @class = "fas fa-edit admin-panel-icon admin-panel-icon-edit" })
                 @Html.ActionLink(" ", "Delete", new { id = item.ID }, new { @class = "fas fa-trash admin-panel-icon admin-panel-icon-delete" })
             </td>

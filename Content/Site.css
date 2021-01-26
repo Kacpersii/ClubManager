@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 30px;
     padding-bottom: 20px;
     font-size: 15px;
 }
@@ -23,10 +23,17 @@ select,
 textarea {
     max-width: 280px;
 }
-
+a:hover {
+    text-decoration: none;
+}
+.club-logo-img-mini {
+    max-height: 30px;
+    max-width: 30px;
+}
 .club-logo-icon-mini {
     font-size: 20px;
-    margin-right: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 .admin-panel-icon {
     font-size: 20px;
@@ -37,4 +44,7 @@ textarea {
 }
 .admin-panel-icon-delete {
     color: red;
+}
+.add-new-button {
+    margin: 10px;
 }
