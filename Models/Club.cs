@@ -20,7 +20,7 @@ namespace ClubManager.Models
         [Display(Name = "Logo")]
         public string Logo { get; set; }
 
-        public virtual List<User> Managers { get; set; }
+        public virtual List<Manager> Managers { get; set; }
         public virtual List<Team> Teams { get; set; }
         public virtual List<Coach> Coaches { get; set; }
         public virtual List<Player> Players { get; set; }

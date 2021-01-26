@@ -79,10 +79,12 @@ namespace ClubManager.DAL
             users.ForEach(u => context.Users.Add(u));
             context.SaveChanges();
 
-            clubs[0].Managers.Add(users[0]);
-            clubs[1].Managers.Add(users[1]);
-            context.Entry(clubs[0]).State = EntityState.Modified;
-            context.Entry(clubs[1]).State = EntityState.Modified;
+            var managers = new List<Manager>
+            {
+                new Manager { UserID = users[0].ID, ClubID = users[0].ClubID },
+                new Manager { UserID = users[1].ID, ClubID = users[1].ClubID }
+            };
+            managers.ForEach(m => context.Managers.Add(m));
             context.SaveChanges();
 
             var coaches = new List<Coach>

@@ -18,6 +18,7 @@ namespace ClubManager.DAL
 
         public DbSet<Club> Clubs { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Manager> Managers { get; set; }
         public DbSet<Coach> Coaches { get; set; }
         public DbSet<Player> Players { get; set; }
         public DbSet<Team> Teams { get; set; }
@@ -39,7 +40,7 @@ namespace ClubManager.DAL
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<User>().HasRequired<Club>(u => u.Club)
-                .WithMany(c => c.Managers).HasForeignKey(u => u.ClubID)
+                .WithMany()
                 .WillCascadeOnDelete(false);
         }
     }
