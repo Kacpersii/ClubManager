@@ -39,6 +39,32 @@ namespace ClubManager.Controllers
         }
 
         // GET: Club/Create
+        [Authorize(Roles = "Admin")]
+        public ActionResult Add()
+        {
+            ViewBag.ManagerID = new SelectList(db.Managers.Select(m => new { ID = m.ID, Name = m.User.UserName }), "ID", "Name");
+            
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add(Club club)
+        {
+            if (ModelState.IsValid)
+            {
+                var userID = db.Users.Single(u => u.UserName == User.Identity.Name).ID;
+                Manager manager = new Manager { UserID = userID };
+                club.Managers.Add(manager);
+                db.Clubs.Add(club);
+                db.SaveChanges();
+                return RedirectToAction("Details", new { id = club.ID });
+            }
+
+            return View(club);
+        }
+
+        // GET: Club/Create
         public ActionResult Create()
         {
             return View();
@@ -49,13 +75,24 @@ namespace ClubManager.Controllers
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name,Stadium,Logo")] Club club)
+        public ActionResult Create(Club club)
         {
             if (ModelState.IsValid)
             {
+                var userID = db.Users.Single(u => u.UserName == User.Identity.Name).ID;
+                Manager manager = new Manager { UserID = userID };
+                club.Managers.Add(manager);
+
+                HttpPostedFileBase file = Request.Files["Logo"];
+                if (file != null && file.ContentLength > 0)
+                {
+                    club.Logo = System.Guid.NewGuid().ToString() + file.FileName;
+                    file.SaveAs(HttpContext.Server.MapPath("~/Images/Logos/") + club.Logo);
+                }
+
                 db.Clubs.Add(club);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = club.ID });
             }
 
             return View(club);

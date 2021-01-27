@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
@@ -27,8 +28,11 @@ namespace ClubManager.Models
 
     public enum LeadingLeg
     {
+        [Display(Name = "Lewa")]
         Left,
+        [Display(Name = "Prawa")]
         Right,
+        [Display(Name = "Obie")]
         Both
     }
 
