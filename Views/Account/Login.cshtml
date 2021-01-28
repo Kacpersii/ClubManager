@@ -4,15 +4,14 @@
     ViewBag.Title = "Zaloguj";
 }
 
-<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
+
+<h1 class="text-center m-50">Zaloguj się</h1>
+<div class="row mt-50 col-sm-offset-3">
+    <div class="col-md-10">
         <section id="loginForm">
             @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <h4>Zaloguj się za pomocą konta lokalnego.</h4>
-                <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group">
                     @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
@@ -38,12 +37,10 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Zaloguj" class="btn btn-default" />
+                        <input type="submit" value="Zaloguj" class="btn btn-success" />
                     </div>
                 </div>
-                <p>
-                    @Html.ActionLink("Zarejestruj się jako nowy użytkownik", "Register")
-                </p>
+                
                 @* Włącz ten element po włączeniu potwierdzenia konta dla funkcji resetowania hasła
                     <p>
                         @Html.ActionLink("Nie pamiętasz hasła?", "ForgotPassword")
@@ -51,13 +48,11 @@
             }
         </section>
     </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
 </div>
-
+<p class="text-center p-50">
+    Nie masz konta?
+    @Html.ActionLink("Zarejestruj się", "Register", "Account", new { }, new { @class = "btn btn-primary add-new-button" })
+</p>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

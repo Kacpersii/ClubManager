@@ -58,39 +58,38 @@ namespace ClubManager.DAL
             userManager.Create(player3, password2);
             userManager.AddToRole(player3.Id, "Player");
 
-            var clubs = new List<Club>
-            {
-                new Club { Name = "FC Warszawa", Logo = "FC Warszawa.jpg" },
-                new Club { Name = "Pogoń Lublin" }
-            };
-            clubs.ForEach(c => context.Clubs.Add(c));
-            context.SaveChanges();
-
             var users = new List<User>
             {
-                new User { UserName = manager1.UserName, FirstName = "Artur", LastName = "Kowalczyk", BirthDate = DateTime.Parse("1974-01-23"), PhoneNumber = "516325698", ClubID = clubs[0].ID },
-                new User { UserName = manager2.UserName, FirstName = "Krzystof", LastName = "Nowak", BirthDate = DateTime.Parse("1986-01-23"), PhoneNumber = "523658296", ClubID = clubs[1].ID },
-                new User { UserName = coach1.UserName, FirstName = "Michał", LastName = "Florek", BirthDate = DateTime.Parse("1983-10-27"), PhoneNumber = "513478568", ClubID = clubs[0].ID },
-                new User { UserName = coach2.UserName, FirstName = "Kamil", LastName = "Lewandowski", BirthDate = DateTime.Parse("1990-03-13"), PhoneNumber = "798623458", ClubID = clubs[1].ID },
-                new User { UserName = player1.UserName, FirstName = "Jan", LastName = "Bulik", BirthDate = DateTime.Parse("1992-12-30"), PhoneNumber = "512658101", ClubID = clubs[0].ID },
-                new User { UserName = player2.UserName, FirstName = "Adrian", LastName = "Pawlak", BirthDate = DateTime.Parse("1997-10-26"), PhoneNumber = "526987547", ClubID = clubs[0].ID },
-                new User { UserName = player3.UserName, FirstName = "Michał", LastName = "Kruk", BirthDate = DateTime.Parse("1995-03-09"), PhoneNumber = "728965250", ClubID = clubs[0].ID },
+                new User { UserName = manager1.UserName, FirstName = "Artur", LastName = "Kowalczyk", BirthDate = DateTime.Parse("1974-01-23"), PhoneNumber = "516325698" },
+                new User { UserName = manager2.UserName, FirstName = "Krzystof", LastName = "Nowak", BirthDate = DateTime.Parse("1986-01-23"), PhoneNumber = "523658296" },
+                new User { UserName = coach1.UserName, FirstName = "Michał", LastName = "Florek", BirthDate = DateTime.Parse("1983-10-27"), PhoneNumber = "513478568" },
+                new User { UserName = coach2.UserName, FirstName = "Kamil", LastName = "Lewandowski", BirthDate = DateTime.Parse("1990-03-13"), PhoneNumber = "798623458" },
+                new User { UserName = player1.UserName, FirstName = "Jan", LastName = "Bulik", BirthDate = DateTime.Parse("1992-12-30"), PhoneNumber = "512658101" },
+                new User { UserName = player2.UserName, FirstName = "Adrian", LastName = "Pawlak", BirthDate = DateTime.Parse("1997-10-26"), PhoneNumber = "526987547" },
+                new User { UserName = player3.UserName, FirstName = "Michał", LastName = "Kruk", BirthDate = DateTime.Parse("1995-03-09"), PhoneNumber = "728965250" },
             };
             users.ForEach(u => context.Users.Add(u));
             context.SaveChanges();
 
+            var clubs = new List<Club>
+            {
+                new Club { Name = "FC Warszawa", Logo = "FC Warszawa.jpg",  },
+                new Club { Name = "Pogoń Lublin" }
+            };
+            clubs.ForEach(c => context.Clubs.Add(c));
+            context.SaveChanges();
             var managers = new List<Manager>
             {
-                new Manager { UserID = users[0].ID, ClubID = users[0].ClubID },
-                new Manager { UserID = users[1].ID, ClubID = users[1].ClubID }
+                new Manager { UserID = users[0].ID, ClubID = clubs[0].ID },
+                new Manager { UserID = users[1].ID, ClubID = clubs[1].ID }
             };
             managers.ForEach(m => context.Managers.Add(m));
             context.SaveChanges();
 
             var coaches = new List<Coach>
             {
-                new Coach { UserID = users[2].ID, ClubID = users[2].ClubID },
-                new Coach { UserID = users[3].ID, ClubID = users[3].ClubID }
+                new Coach { UserID = users[2].ID, ClubID = clubs[0].ID },
+                new Coach { UserID = users[3].ID, ClubID = clubs[1].ID }
             };
             coaches.ForEach(c => context.Coaches.Add(c));
             context.SaveChanges();
@@ -105,10 +104,10 @@ namespace ClubManager.DAL
 
             var players = new List<Player>
             {
-                new Player { UserID = users[2].ID, ClubID = users[2].ClubID, TeamID = teams[0].ID, Height = 183, Weight = 78, LeadingLeg = LeadingLeg.Right, MainPosition = "Bramkarz", ShirtsNumber = 1 },
-                new Player { UserID = users[4].ID, ClubID = users[4].ClubID, TeamID = teams[0].ID, Height = 187, Weight = 82, LeadingLeg = LeadingLeg.Right, MainPosition = "Napastnik", ShirtsNumber = 10 },
-                new Player { UserID = users[5].ID, ClubID = users[5].ClubID, TeamID = teams[0].ID, Height = 178, Weight = 73, LeadingLeg = LeadingLeg.Left, MainPosition = "Lewy Obrońca", ShirtsNumber = 2 },
-                new Player { UserID = users[6].ID, ClubID = users[6].ClubID, TeamID = teams[0].ID, Height = 181, Weight = 76, LeadingLeg = LeadingLeg.Both, MainPosition = "Środkowy Pomocnik", ShirtsNumber = 6 },
+                new Player { UserID = users[2].ID, ClubID = clubs[0].ID, TeamID = teams[0].ID, Height = 183, Weight = 78, LeadingLeg = LeadingLeg.Right, MainPosition = "Bramkarz", ShirtsNumber = 1 },
+                new Player { UserID = users[4].ID, ClubID = clubs[0].ID, TeamID = teams[0].ID, Height = 187, Weight = 82, LeadingLeg = LeadingLeg.Right, MainPosition = "Napastnik", ShirtsNumber = 10 },
+                new Player { UserID = users[5].ID, ClubID = clubs[0].ID, TeamID = teams[0].ID, Height = 178, Weight = 73, LeadingLeg = LeadingLeg.Left, MainPosition = "Lewy Obrońca", ShirtsNumber = 2 },
+                new Player { UserID = users[6].ID, ClubID = clubs[01].ID, TeamID = teams[0].ID, Height = 181, Weight = 76, LeadingLeg = LeadingLeg.Both, MainPosition = "Środkowy Pomocnik", ShirtsNumber = 6 },
             };
             players.ForEach(p => context.Players.Add(p));
             context.SaveChanges();

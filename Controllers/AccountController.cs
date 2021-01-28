@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ClubManager.Models;
+using ClubManager.DAL;
 
 namespace ClubManager.Controllers
 {
@@ -147,16 +148,28 @@ namespace ClubManager.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, string firstName, string lastName, DateTime birthDate, string phoneNumber)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
+                var applicationUser = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(applicationUser, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    await SignInManager.SignInAsync(applicationUser, isPersistent: false, rememberBrowser: false);
+
+                    User user = new User { UserName = model.Email, FirstName = firstName, LastName = lastName, BirthDate = birthDate, PhoneNumber = phoneNumber };
+
+                    HttpPostedFileBase file = Request.Files["photo"];
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        user.Photo = System.Guid.NewGuid().ToString() + file.FileName;
+                        file.SaveAs(HttpContext.Server.MapPath("~/Images/Photos/") + user.Photo);
+                    }
+
+                    ClubManagerContext db = new ClubManagerContext();
+                    db.Users.Add(user);
+                    db.SaveChanges();
                     // Aby uzyskać więcej informacji o sposobie włączania potwierdzania konta i resetowaniu hasła, odwiedź stronę https://go.microsoft.com/fwlink/?LinkID=320771
                     // Wyślij wiadomość e-mail z tym łączem
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);

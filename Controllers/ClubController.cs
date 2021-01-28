@@ -8,6 +8,9 @@ using System.Web;
 using System.Web.Mvc;
 using ClubManager.DAL;
 using ClubManager.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace ClubManager.Controllers
 {
@@ -15,6 +18,19 @@ namespace ClubManager.Controllers
     public class ClubController : Controller
     {
         private ClubManagerContext db = new ClubManagerContext();
+        private ApplicationUserManager _userManager;
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
         // GET: Club
         [Authorize(Roles = "Admin")]
@@ -79,9 +95,6 @@ namespace ClubManager.Controllers
         {
             if (ModelState.IsValid)
             {
-                var userID = db.Users.Single(u => u.UserName == User.Identity.Name).ID;
-                Manager manager = new Manager { UserID = userID };
-                club.Managers.Add(manager);
 
                 HttpPostedFileBase file = Request.Files["Logo"];
                 if (file != null && file.ContentLength > 0)
@@ -92,6 +105,23 @@ namespace ClubManager.Controllers
 
                 db.Clubs.Add(club);
                 db.SaveChanges();
+
+                var user = db.Users.Single(u => u.UserName == User.Identity.Name);
+                Manager manager = new Manager { UserID = user.ID, ClubID = club.ID };
+                db.Managers.Add(manager);
+                db.SaveChanges();
+
+                try
+                {
+                    var user1 = UserManager.FindByName(user.UserName);
+                    UserManager.AddToRole(user1.Id, "Manager");
+                    db.SaveChanges();
+                }
+                catch
+                {
+                    throw;
+                }
+
                 return RedirectToAction("Details", new { id = club.ID });
             }
 

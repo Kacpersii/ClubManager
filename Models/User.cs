@@ -32,13 +32,7 @@ namespace ClubManager.Models
         [Display(Name = "Numer telefonu")]
         public string PhoneNumber { get; set; }
 
-        [Required]
         [Display(Name = "Zdjęcie")]
-        public int Photo { get; set; }
-
-        public int ClubID { get; set; }
-
-
-        public virtual Club Club { get; set; }
+        public string Photo { get; set; }
     }
 }
