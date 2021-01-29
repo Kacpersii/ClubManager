@@ -53,6 +53,36 @@ namespace ClubManager.Controllers
             }
             return View(club);
         }
+        public ActionResult ManagersClub()
+        {
+            User user = db.Users.Single(u => u.UserName == User.Identity.Name);
+            Club club = db.Clubs.Single(c => c.Managers.Any(p => p.UserID == user.ID));
+            if (club == null)
+            {
+                return HttpNotFound();
+            }
+            return View("Details", club);
+        }
+        public ActionResult CoachsClub()
+        {
+            User user = db.Users.Single(u => u.UserName == User.Identity.Name);
+            Club club = db.Clubs.Single(c => c.Coaches.Any(p => p.UserID == user.ID));
+            if (club == null)
+            {
+                return HttpNotFound();
+            }
+            return View("Details", club);
+        }
+        public ActionResult PlayersClub()
+        {
+            User user = db.Users.Single(u => u.UserName == User.Identity.Name);
+            Club club = db.Clubs.Single(c => c.Players.Any(p => p.UserID == user.ID));
+            if (club == null)
+            {
+                return HttpNotFound();
+            }
+            return View("Details", club);
+        }
 
         // GET: Club/Create
         [Authorize(Roles = "Admin")]
@@ -122,7 +152,7 @@ namespace ClubManager.Controllers
                     throw;
                 }
 
-                return RedirectToAction("Details", new { id = club.ID });
+                return RedirectToAction("ManagersClub");
             }
 
             return View(club);

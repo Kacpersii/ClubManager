@@ -107,7 +107,7 @@ namespace ClubManager.DAL
                 new Player { UserID = users[2].ID, ClubID = clubs[0].ID, TeamID = teams[0].ID, Height = 183, Weight = 78, LeadingLeg = LeadingLeg.Right, MainPosition = "Bramkarz", ShirtsNumber = 1 },
                 new Player { UserID = users[4].ID, ClubID = clubs[0].ID, TeamID = teams[0].ID, Height = 187, Weight = 82, LeadingLeg = LeadingLeg.Right, MainPosition = "Napastnik", ShirtsNumber = 10 },
                 new Player { UserID = users[5].ID, ClubID = clubs[0].ID, TeamID = teams[0].ID, Height = 178, Weight = 73, LeadingLeg = LeadingLeg.Left, MainPosition = "Lewy Obrońca", ShirtsNumber = 2 },
-                new Player { UserID = users[6].ID, ClubID = clubs[01].ID, TeamID = teams[0].ID, Height = 181, Weight = 76, LeadingLeg = LeadingLeg.Both, MainPosition = "Środkowy Pomocnik", ShirtsNumber = 6 },
+                new Player { UserID = users[6].ID, ClubID = clubs[0].ID, TeamID = teams[0].ID, Height = 181, Weight = 76, LeadingLeg = LeadingLeg.Both, MainPosition = "Środkowy Pomocnik", ShirtsNumber = 6 },
             };
             players.ForEach(p => context.Players.Add(p));
             context.SaveChanges();

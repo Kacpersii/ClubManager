@@ -23,14 +23,32 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Klub", "Index", "Club")</li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Kluby", "Index", "Club")</li>
+                    }
+                    else if (User.IsInRole("Manager"))
+                    {
+                        <li>@Html.ActionLink("Klub", "ManagersClub", "Club")</li>
+                    }
+                    else if (User.IsInRole("Coach"))
+                    {
+                        <li>@Html.ActionLink("Klub", "CoachsClub", "Club")</li>
+                    }
+                    else if (User.IsInRole("Player"))
+                    {
+                        <li>@Html.ActionLink("Klub", "PlayersClub", "Club")</li>
+                    }
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
     <div class="container body-content" style="margin-top: 50px;">
+
         @RenderBody()
+
         <hr />
         <footer>
             <p>ClubManager &copy; @DateTime.Now.Year - Kacper Adamiak</p>

@@ -1,7 +1,17 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-
+@if (!User.Identity.IsAuthenticated)
+{
+    <p>
+        Tutaj jakiś tekst jeśli nie jestem zalogowany
+    </p>
+}else if (!User.IsInRole("Admin") && !User.IsInRole("Manager") && !User.IsInRole("Coach") && !User.IsInRole("Player"))
+{
+    <div class="mt-50 text-center">
+        @Html.ActionLink("Załóż swój klub", "Create", "Club", new { }, new { @class = "btn btn-primary btn-lg" })
+    </div>
+}
 <div class="jumbotron">
     <h1>ASP.NET</h1>
     <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
