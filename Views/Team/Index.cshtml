@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ClubManager.Models.Team>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1 class="text-center m-30">Zespoły</h1>
+
+<p>
+    @Html.ActionLink("Dodaj nowy zespół", "AddTeam", new { }, new { @class = "btn btn-success add-new-button" })
+</p>
+<table class="table table-hover">
+    <tr>
+        <th>
+            Nazwa drużyny
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Club.Name)
+        </th>
+        <th>
+            Trener
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Name, "Details", new { id = item.ID })
+            </td>
+            <td>
+                @item.Club.Name
+            </td>
+            <td>
+                @item.Coach.User.FirstName @item.Coach.User.LastName
+            </td>
+            <td class="text-center">
+                @Html.ActionLink(" ", "Edit", new { id = item.ID }, new { @class = "fas fa-edit admin-panel-icon admin-panel-icon-edit" })
+                @Html.ActionLink(" ", "Delete", new { id = item.ID }, new { @class = "fas fa-trash admin-panel-icon admin-panel-icon-delete" })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,47 @@
+﻿@model ClubManager.Models.Team
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h1 class="text-center">@Model.Name</h1>
+<h2>
+    <img src="~/Images/Logos/@Model.Club.Logo" alt="@Model.Club.Name logo" class="club-logo-img-mini" />
+    @Model.Club.Name
+</h2>
+<p>
+    Trener: @Html.ActionLink(Model.Coach.User.FirstName + " " + Model.Coach.User.LastName, "Details", "Coach", new { id = Model.ClubID }, "")
+</p>
+<table class="table table-hover">
+    <tr>
+        <th>
+            Imie i Nazwisko
+        </th>
+        <th>
+            Numer koszulki
+        </th>
+        <th>
+            Pozycja
+        </th>
+        <th>
+            Lepsza noga
+        </th>
+    </tr>
+    @foreach (var player in Model.Players)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(player.User.FirstName + " " + player.User.LastName, "Details", "Player", new { id = player.ID }, "")
+            </td>
+            <td>
+                @player.ShirtsNumber
+            </td>
+            <td>
+                @player.MainPosition
+            </td>
+            <td>
+                @player.LeadingLeg
+            </td>
+        </tr>
+    }
+</table>

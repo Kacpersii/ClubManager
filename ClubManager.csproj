@@ -172,6 +172,7 @@
     <Compile Include="Controllers\ClubController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="DAL\ClubManagerContext.cs" />
     <Compile Include="DAL\DBInitializer.cs" />
     <Compile Include="Global.asax.cs">
@@ -251,6 +252,11 @@
     <Content Include="Views\Club\Edit.cshtml" />
     <Content Include="Views\Club\Index.cshtml" />
     <Content Include="Views\Club\_AddManager.cshtml" />
+    <Content Include="Views\Team\Create.cshtml" />
+    <Content Include="Views\Team\Delete.cshtml" />
+    <Content Include="Views\Team\Details.cshtml" />
+    <Content Include="Views\Team\Edit.cshtml" />
+    <Content Include="Views\Team\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
