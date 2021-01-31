@@ -250,6 +250,7 @@
     <Content Include="Views\Club\Details.cshtml" />
     <Content Include="Views\Club\Edit.cshtml" />
     <Content Include="Views\Club\Index.cshtml" />
+    <Content Include="Views\Club\_AddManager.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

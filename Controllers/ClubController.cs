@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using ClubManager.DAL;
@@ -86,28 +87,14 @@ namespace ClubManager.Controllers
 
         // GET: Club/Create
         [Authorize(Roles = "Admin")]
-        public ActionResult Add()
+        public ActionResult AddClub()
         {
-            ViewBag.ManagerID = new SelectList(db.Managers.Select(m => new { ID = m.ID, Name = m.User.UserName }), "ID", "Name");
+            var users = db.Users
+                .Where(u => !db.Managers.Any(m => m.UserID == u.ID))
+                .Select(u => new { ID = u.ID, Name = u.UserName });
+            ViewBag.userID = new SelectList(users, "ID", "Name");
             
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Add(Club club)
-        {
-            if (ModelState.IsValid)
-            {
-                var userID = db.Users.Single(u => u.UserName == User.Identity.Name).ID;
-                Manager manager = new Manager { UserID = userID };
-                club.Managers.Add(manager);
-                db.Clubs.Add(club);
-                db.SaveChanges();
-                return RedirectToAction("Details", new { id = club.ID });
-            }
-
-            return View(club);
+            return View("Create");
         }
 
         // GET: Club/Create
@@ -121,7 +108,7 @@ namespace ClubManager.Controllers
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Club club)
+        public ActionResult Create(Club club, int? userID)
         {
             if (ModelState.IsValid)
             {
@@ -136,24 +123,42 @@ namespace ClubManager.Controllers
                 db.Clubs.Add(club);
                 db.SaveChanges();
 
-                var user = db.Users.Single(u => u.UserName == User.Identity.Name);
-                Manager manager = new Manager { UserID = user.ID, ClubID = club.ID };
-                db.Managers.Add(manager);
-                db.SaveChanges();
-
-                try
+                User user;
+                if (User.IsInRole("Admin"))
                 {
-                    var user1 = UserManager.FindByName(user.UserName);
-                    UserManager.AddToRole(user1.Id, "Manager");
+                    user = db.Users.Single(u => u.ID == userID);
+                    Manager createdManager = new Manager { UserID = (int)userID, ClubID = club.ID };
+                    db.Managers.Add(createdManager);
+                    db.SaveChanges();
+
+                } 
+                else
+                {
+                    user = db.Users.Single(u => u.UserName == User.Identity.Name);
+                    Manager manager = new Manager { UserID = user.ID, ClubID = club.ID };
+                    db.Managers.Add(manager);
                     db.SaveChanges();
                 }
-                catch
-                {
-                    throw;
-                }
 
-                return RedirectToAction("ManagersClub");
+                var user1 = UserManager.FindByName(user.UserName);
+                UserManager.AddToRole(user1.Id, "Manager");
+                db.SaveChanges();
+
+                if (User.IsInRole("Admin"))
+                {
+                    return RedirectToAction("Details", new { id = club.ID });
+                }
+                else
+                {
+                    return RedirectToAction("ManagersClub");
+                }
+                    
             }
+
+            var users = db.Users
+                .Where(u => !db.Managers.Any(m => m.UserID == u.ID))
+                .Select(u => new { ID = u.ID, Name = u.UserName });
+            ViewBag.userID = new SelectList(users, "ID", "Name");
 
             return View(club);
         }
