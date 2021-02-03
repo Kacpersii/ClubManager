@@ -31,10 +31,14 @@
 <div class="row">
     <hr />
     <h1 class="text-center p-20">Drużyny</h1>
+    @if (Model.Teams.Count == 0)
+    {
+        <p class="text-center">Klub nie posiada żadnych zespołów zespołów</p>
+    }
     @foreach (var team in Model.Teams)
     {
         <div class="jumbotron">
-            <h2>@team.Name</h2>
+            <h2>@Html.ActionLink(team.Name, "Details", "Team", new { id = team.ID }, "")</h2>
             <p>
                 Trener: @Html.ActionLink(team.Coach.User.FirstName + " " + team.Coach.User.LastName, "Details", "Coach", new { id = team.ClubID }, "")
             </p>
@@ -73,4 +77,11 @@
             </table>
         </div>
     }
+    @if (User.IsInRole("Admin") || User.IsInRole("Manager"))
+    {
+        <p class="text-center">
+            @Html.ActionLink("Dodaj nowy zespół", "Create", "Team", new { }, new { @class = "btn btn-success add-new-button" })
+        </p>
+    }
+
 </div>

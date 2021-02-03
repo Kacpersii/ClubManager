@@ -41,6 +41,7 @@ namespace ClubManager.Controllers
         }
 
         // GET: Club/Details/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -54,6 +55,8 @@ namespace ClubManager.Controllers
             }
             return View(club);
         }
+
+        [Authorize(Roles = "Manager")]
         public ActionResult ManagersClub()
         {
             User user = db.Users.Single(u => u.UserName == User.Identity.Name);
@@ -64,6 +67,8 @@ namespace ClubManager.Controllers
             }
             return View("Details", club);
         }
+
+        [Authorize(Roles = "Coach")]
         public ActionResult CoachsClub()
         {
             User user = db.Users.Single(u => u.UserName == User.Identity.Name);
@@ -74,6 +79,8 @@ namespace ClubManager.Controllers
             }
             return View("Details", club);
         }
+
+        [Authorize(Roles = "Player")]
         public ActionResult PlayersClub()
         {
             User user = db.Users.Single(u => u.UserName == User.Identity.Name);

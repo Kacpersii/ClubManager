@@ -1,0 +1,90 @@
+﻿@model ClubManager.Models.Player
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Player</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Club.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Club.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Team.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Team.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LeadingLeg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeadingLeg)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Height)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Height)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Weight)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Weight)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShirtsNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShirtsNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MainPosition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MainPosition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SecondPosition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SecondPosition)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

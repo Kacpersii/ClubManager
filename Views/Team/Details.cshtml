@@ -6,7 +6,15 @@
 
 <h1 class="text-center">@Model.Name</h1>
 <h2>
-    <img src="~/Images/Logos/@Model.Club.Logo" alt="@Model.Club.Name logo" class="club-logo-img-mini" />
+    @if (Model.Club.Logo != null)
+    {
+        <img src="~/Images/Logos/@Model.Club.Logo" alt="@Model.Club.Name logo" class="club-logo-img-mini" />
+    }
+    else
+    {
+        <i class="far fa-futbol club-logo-icon-large"></i>
+    }
+
     @Model.Club.Name
 </h2>
 <p>
