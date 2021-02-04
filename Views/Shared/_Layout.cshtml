@@ -42,18 +42,30 @@
 
                     @if (User.IsInRole("Admin"))
                     {
-                    <li>@Html.ActionLink("Drużyny", "Index", "Team")</li>
+                        <li>@Html.ActionLink("Drużyny", "Index", "Team")</li>
                     }
                     else if (User.IsInRole("Manager"))
                     {
-                    <li>@Html.ActionLink("Drużyny", "ClubTeams", "Team")</li>
+                        <li>@Html.ActionLink("Drużyny", "ClubTeams", "Team")</li>
                     }
                     else if (User.IsInRole("Coach") || User.IsInRole("Player"))
                     {
                         <li>@Html.ActionLink("Moja drużyna", "MyTeam", "Team")</li>
                     }
 
-                    </ul>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Zawodnicy", "Index", "Player")</li>
+                    }
+                    else if (User.IsInRole("Manager"))
+                    {
+                        <li>@Html.ActionLink("Zawodnicy", "Index", "Player")</li>
+                    }
+                    else if (User.IsInRole("Player"))
+                    {
+                        <li>@Html.ActionLink("Mój profil zawodnika", "MyProfile", "Player")</li>
+                    }
+                </ul>
                 @Html.Partial("_LoginPartial")
             </div>
         </div>

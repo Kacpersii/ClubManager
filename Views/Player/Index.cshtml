@@ -4,78 +4,56 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h1 class="text-center m-30">Zawodnicy</h1>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Dodaj nowego zawodnika", "Create", new { }, new { @class = "btn btn-success add-new-button" })
 </p>
-<table class="table">
+<table class="table table-hover">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Club.Name)
+            Imie i nazwisko
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Team.Name)
+            Drużyna
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.User.UserName)
+            Numer koszulki
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.LeadingLeg)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Height)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Weight)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ShirtsNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MainPosition)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SecondPosition)
+            Pozycja
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Club.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Team.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.User.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LeadingLeg)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Height)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Weight)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShirtsNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MainPosition)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SecondPosition)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @if (item.User.Photo != null)
+                {
+                    <img src="~/Images/Photos/@item.User.Photo" alt="@item.User.UserName photo" class="user-photo-mini" />
+                }
+                else
+                {
+                    <i class="fas fa-user user-avatar-mini"></i>
+                }
+                @Html.ActionLink(item.User.FirstName + " " + item.User.LastName, "Details", new { id = item.ID })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Team.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShirtsNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MainPosition)
+            </td>
+            <td class="text-center">
+                @Html.ActionLink(" ", "Edit", new { id = item.ID }, new { @class = "fas fa-edit admin-panel-icon admin-panel-icon-edit" })
+                @Html.ActionLink(" ", "Delete", new { id = item.ID }, new { @class = "fas fa-trash admin-panel-icon admin-panel-icon-delete" })
+            </td>
+        </tr>
+    }
 
 </table>
