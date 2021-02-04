@@ -17,12 +17,6 @@
         <th>
             Drużyna
         </th>
-        <th>
-            Numer koszulki
-        </th>
-        <th>
-            Pozycja
-        </th>
         <th></th>
     </tr>
 
@@ -42,12 +36,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Team.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ShirtsNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MainPosition)
             </td>
             <td class="text-center">
                 @Html.ActionLink(" ", "Edit", new { id = item.ID }, new { @class = "fas fa-edit admin-panel-icon admin-panel-icon-edit" })

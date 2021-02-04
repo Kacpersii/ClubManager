@@ -25,6 +25,17 @@ namespace ClubManager.Controllers
             return View(players.ToList());
         }
 
+        [Authorize(Roles = "Manager")]
+        public ActionResult ClubPlayers()
+        {
+            var user = db.Users.Single(u => u.UserName == User.Identity.Name);
+            var manager = db.Managers.Single(m => m.UserID == user.ID);
+            var club = db.Clubs.Find(manager.ClubID);
+            var players = db.Players.Where(p => p.ClubID == club.ID);
+
+            return View("Index", players.ToList());
+        }
+
         // GET: Player/Details/5
         [Authorize(Roles = "Admin,Manager")]
         public ActionResult Details(int? id)

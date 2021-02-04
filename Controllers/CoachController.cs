@@ -11,6 +11,7 @@ using ClubManager.Models;
 
 namespace ClubManager.Controllers
 {
+    [Authorize]
     public class CoachController : Controller
     {
         private ClubManagerContext db = new ClubManagerContext();
@@ -22,7 +23,19 @@ namespace ClubManager.Controllers
             return View(coaches.ToList());
         }
 
+        [Authorize(Roles = "Manager")]
+        public ActionResult ClubTeams()
+        {
+            var user = db.Users.Single(u => u.UserName == User.Identity.Name);
+            var manager = db.Managers.Single(m => m.UserID == user.ID);
+            var club = db.Clubs.Find(manager.ClubID);
+            var coaches = db.Coaches.Where(c => c.ClubID == club.ID);
+
+            return View("Index", coaches.ToList());
+        }
+
         // GET: Coach/Details/5
+        [Authorize(Roles = "Admin,Manager")]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -35,6 +48,15 @@ namespace ClubManager.Controllers
                 return HttpNotFound();
             }
             return View(coach);
+        }
+
+        [Authorize(Roles = "Coach")]
+        public ActionResult MyProfile()
+        {
+            User user = db.Users.Single(u => u.UserName == User.Identity.Name);
+            Coach coach = db.Coaches.Single(p => p.UserID == user.ID);
+
+            return View("Details", coach);
         }
 
         // GET: Coach/Create

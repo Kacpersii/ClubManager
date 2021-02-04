@@ -4,31 +4,25 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4>Coach</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Club.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Club.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.User.UserName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.User.UserName)
-        </dd>
-
-    </dl>
+<div class="row mt-30">
+    <div class="col-sm-4 text-center">
+        @if (Model.User.Photo != null)
+        {
+            <img src="~/Images/Photos/@Model.User.Photo" alt="@Model.User.UserName photo" class="img-responsive" />
+        }
+        else
+        {
+            <i class="fas fa-user user-avatar"></i>
+        }
+    </div>
+    <div class="col-sm-8 p-30">
+        <h1>@Model.User.FirstName @Model.User.LastName</h1>
+        <p class="mt-30"><label>Klub:</label> @Model.Club.Name</p>
+        <p><label>Email:</label> @Model.User.UserName</p>
+        <p><label>Nr. telefonu:</label> @Model.User.PhoneNumber</p>
+        <p><label>Data urodzenia:</label> @Model.User.BirthDate</p>
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<hr class="mt-30" />
+<div class="row p-30">
+</div>

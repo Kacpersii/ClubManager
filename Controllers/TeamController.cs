@@ -24,6 +24,17 @@ namespace ClubManager.Controllers
             return View(teams.ToList());
         }
 
+        [Authorize(Roles = "Manager")]
+        public ActionResult ClubTeams()
+        {
+            var user = db.Users.Single(u => u.UserName == User.Identity.Name);
+            var manager = db.Managers.Single(m => m.UserID == user.ID);
+            var club = db.Clubs.Find(manager.ClubID);
+            var teams = db.Teams.Where(t => t.ClubID == club.ID);
+
+            return View("Index", teams.ToList());
+        }
+
         // GET: Team/Details/5
         [Authorize(Roles = "Admin")]
         public ActionResult Details(int? id)
@@ -38,17 +49,6 @@ namespace ClubManager.Controllers
                 return HttpNotFound();
             }
             return View(team);
-        }
-
-        [Authorize(Roles = "Manager")]
-        public ActionResult ClubTeams()
-        {
-            var user = db.Users.Single(u => u.UserName == User.Identity.Name);
-            var manager = db.Managers.Single(m => m.UserID == user.ID);
-            var club = db.Clubs.Find(manager.ClubID);
-            var teams = db.Teams.Where(t => t.ClubID == club.ID);
-
-            return View("Index", teams.ToList());
         }
 
         [Authorize(Roles = "Player,Coach")]

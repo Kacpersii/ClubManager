@@ -4,36 +4,44 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h1 class="text-center m-30">Trenerzy</h1>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Dodaj nowego trenera", "Create", new { }, new { @class = "btn btn-success add-new-button" })
 </p>
-<table class="table">
+<table class="table table-hover">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Club.Name)
+            Imię i nazwisko
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.User.UserName)
+            @Html.DisplayNameFor(model => model.Club.Name)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Club.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.User.UserName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @if (item.User.Photo != null)
+                {
+                    <img src="~/Images/Photos/@item.User.Photo" alt="@item.User.UserName photo" class="user-photo-mini" />
+                }
+                else
+                {
+                    <i class="fas fa-user user-avatar-mini"></i>
+                }
+                @Html.ActionLink(item.User.FirstName + " " + item.User.LastName, "Details", new { id = item.ID })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Club.Name)
+            </td>
+            <td class="text-center">
+                @Html.ActionLink(" ", "Edit", new { id = item.ID }, new { @class = "fas fa-edit admin-panel-icon admin-panel-icon-edit" })
+                @Html.ActionLink(" ", "Delete", new { id = item.ID }, new { @class = "fas fa-trash admin-panel-icon admin-panel-icon-delete" })
+            </td>
+        </tr>
+    }
 
 </table>
