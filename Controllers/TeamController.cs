@@ -73,7 +73,7 @@ namespace ClubManager.Controllers
         public ActionResult Create()
         {
             ViewBag.ClubID = new SelectList(db.Clubs, "ID", "Name");
-            ViewBag.CoachID = new SelectList(db.Coaches, "ID", "ID");
+            ViewBag.CoachID = new SelectList(db.Coaches.Select(c => new { ID = c.ID, Name = c.User.UserName + " - " + c.Club.Name }), "ID", "Name");
             return View();
         }
 
@@ -86,13 +86,23 @@ namespace ClubManager.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Teams.Add(team);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var coach = db.Coaches.Find(team.CoachID);
+                var club = db.Clubs.Find(team.ClubID);
+                if (coach.ClubID == team.ClubID)
+                {
+                    db.Teams.Add(team);
+                    db.SaveChanges();
+                    return RedirectToAction("Details", new { id = team.ID });
+                }
+                else
+                {
+                    ViewBag.ErrorMessage = $"Trener {coach.User.UserName} nie jest zatrudniony w klubie {club.Name}";
+                }
             }
 
             ViewBag.ClubID = new SelectList(db.Clubs, "ID", "Name", team.ClubID);
-            ViewBag.CoachID = new SelectList(db.Coaches, "ID", "ID", team.CoachID);
+            ViewBag.CoachID = new SelectList(db.Coaches.Select(c => new { ID = c.ID, Name = c.User.UserName + " - " + c.Club.Name }), "ID", "Name", team.CoachID);
+
             return View(team);
         }
 
