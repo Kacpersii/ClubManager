@@ -105,6 +105,7 @@ namespace ClubManager.Controllers
         }
 
         // GET: Club/Create
+        [Authorize(Roles = "Manager")]
         public ActionResult Create()
         {
             return View();
@@ -115,6 +116,7 @@ namespace ClubManager.Controllers
         // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin,Manager")]
         public ActionResult Create(Club club, int? userID)
         {
             if (ModelState.IsValid)

@@ -25,4 +25,11 @@
 </div>
 <hr class="mt-30" />
 <div class="row p-30">
+    <h2>Prowadzone zespoły:</h2>
+    @foreach (var item in Model.Teams)
+    {
+        <div class="col-sm-12">
+            <p>@Html.ActionLink(item.Name, "Details", "Team", new { id = item.ID }, new { })<p>
+        </div>
+    }
 </div>
