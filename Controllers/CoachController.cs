@@ -17,6 +17,7 @@ namespace ClubManager.Controllers
         private ClubManagerContext db = new ClubManagerContext();
 
         // GET: Coach
+        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             var coaches = db.Coaches.Include(c => c.Club).Include(c => c.User);
@@ -24,7 +25,7 @@ namespace ClubManager.Controllers
         }
 
         [Authorize(Roles = "Manager")]
-        public ActionResult ClubTeams()
+        public ActionResult ClubCoaches()
         {
             var user = db.Users.Single(u => u.UserName == User.Identity.Name);
             var manager = db.Managers.Single(m => m.UserID == user.ID);
