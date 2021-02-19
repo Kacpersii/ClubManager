@@ -182,8 +182,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Exercise.cs" />
     <Compile Include="Models\Manager.cs" />
     <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\TrainingOutline.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Team.cs" />
     <Compile Include="Models\IdentityModels.cs" />

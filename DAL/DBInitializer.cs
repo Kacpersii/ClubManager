@@ -122,6 +122,25 @@ namespace ClubManager.DAL
             messages.ForEach(m => context.Messages.Add(m));
             context.SaveChanges();
 
+            var exercises = new List<Exercise>
+            {
+                new Exercise { Name = "Rozgrzewka", NumberOfPlayers = 1, ExecutionTime = 10, ExerciseScheme = "", Description = "Dokładne rozgrzanie całego ciała, wszystkich partii mięśniowych, w celu uniknięcia kontuzji" },
+                new Exercise { Name = "Gra w dziadka", NumberOfPlayers = 4, ExecutionTime = 5, ExerciseScheme = "", Description = "Gra w dziadka" },
+                new Exercise { Name = "Wyprowadzenie piłki ze strefy obrony.", NumberOfPlayers = 8, ExecutionTime = 15, ExerciseScheme = "schemat3.jpg", Description = "To kompleksowe ćwiczenie łączy w sobie dwa elementy taktyczne; wyprowadzenie piłki ze strefy obrony i rozegranie ataku w środkowym pasie. Sprzyja doskonaleniu techniki podań bez przyjęcia i  kształtowaniu szybkości działania. Schemat pokazuje ćwiczenie wykonywane w jednej bocznej strefie, ale wykonuje się je na przemian w dwóch.Przebieg ćwiczenia: Zawodnik A podaje piłkę do partnera B i wykonuje start w kierunku linii bocznej. Po otrzymaniu piłki podanej od B zagrywa także bez przyjęcia do C. Kolejne podania wymieniają pomiędzy sobą zawodnicy C i B, po których zawodnik C podaje do D i kończy fazę wyprowadzenia piłki ze strefy obrony. D podaje do E i po odegraniu przez niego piłki wykonuje strzał na bramkę.Zmiany wykonywane są „za piłką” na miejsce kolejnego partnera. Ćwiczenie wykonywane jest na przemian z dwóch stron. Zawodnik wykonujący ćwiczenie z prawej strony po oddaniu strzału ustawia się na końcu drugiej grupy. Stosujemy szybkie podania bez przyjęcia wewnętrzną częścią stopy." },
+                new Exercise { Name = "Podanie i przyjęcie na sygnał „Czas i plecy”", NumberOfPlayers = 2, ExecutionTime = 8, ExerciseScheme = "schemat1.png", Description = "Zawodnicy dobrani w dwójki w odległości 8-10 m. Na komendę „plecy” ćwiczący podają bez przyjęcia, na komendę „czas” podają oraz przyjmują wewnętrzną częścią stopy. Zawodnik bez piłki ustawiony nisko na nogach (unikamy bezsensownego truchtu w miejscu).  Możecie dodać gesty – partner pokazuje ręką kierunek podania. Wymuszam na moich podopiecznych komunikację w zespole, jestem uczulony na ciszę podczas gry. Zawodnicy MUSZĄ podpowiadać sobie, krzyczeć, informować o wolnej pozycji itd. Zwracam na to szczególną uwagę, to zawodnicy są głównymi kreatorami podczas meczu, trener ma ich tylko i aż wspierać, wspomagać w działaniu." },
+                new Exercise { Name = "Gra „Do 10 podań”", NumberOfPlayers = 12, ExerciseScheme = "", ExecutionTime = 12, Description = "Zawodnicy podzieleni na dwa zespoły, wymieniają między sobą podania (głośno licząc). Drużyna przeciwna stara się przejąć piłkę. Po przejęciu piłki, wymieniają podania między sobą( nie ma podań powrotnych). Drużyna zdobywa punkt, gdy wykona 10 podań z rzędu. Wygrywa zespół, który zdobędzie więcej punktów." },
+                new Exercise { Name = "Podania między pachołkami", NumberOfPlayers = 2, ExecutionTime = 8, ExerciseScheme = "schemat2.png", Description = "Zawodnicy ustawieni w dwójkach w odległości 5-8m. Zadaniem ćwiczących jest podanie między pachołkami. Możemy wprowadzić element rywalizacji – która dwójka wykona więcej podań w określonym czasie? Punkty karne przyznawane są za każdorazowe trafienie w pachołek. Przyjęcia wewnętrzną częścią stopy, podania bez przyjęcia. W zależności od poziomu grupy – zwiększamy/zmniejszamy odległość między pachołkami. Możemy pobawić się formą – różne ustawienie pachołków." },
+            };
+            exercises.ForEach(e => context.Exercises.Add(e));
+            context.SaveChanges();
+
+            var trainingOutlines = new List<TrainingOutline>
+            {
+                new TrainingOutline { Name = "Trening utrzymania przy piłce", AuthorID = users[2].ID, Exercises = new List<Exercise>{ exercises[0], exercises[3], exercises[5], exercises[1], exercises[4] } },
+            };
+            trainingOutlines.ForEach(o => context.TrainingOutlines.Add(o));
+            context.SaveChanges();
+
         }
     }
 }

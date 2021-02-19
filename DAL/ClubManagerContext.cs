@@ -22,6 +22,10 @@ namespace ClubManager.DAL
         public DbSet<Coach> Coaches { get; set; }
         public DbSet<Player> Players { get; set; }
         public DbSet<Team> Teams { get; set; }
+
+        public DbSet<Exercise> Exercises { get; set; }
+        public DbSet<TrainingOutline> TrainingOutlines { get; set; }
+
         public DbSet<Message> Messages { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
