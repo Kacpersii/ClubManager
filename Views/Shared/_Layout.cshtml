@@ -78,6 +78,11 @@
                     {
                         <li>@Html.ActionLink("Mój profil zawodnika", "MyProfile", "Player")</li>
                     }
+
+                    @if (User.IsInRole("Manager") || User.IsInRole("Coach") || User.IsInRole("Player"))
+                    {
+                        <li>@Html.ActionLink("Wiadomości", "Contacts", "Message")</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

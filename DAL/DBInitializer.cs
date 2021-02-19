@@ -112,6 +112,15 @@ namespace ClubManager.DAL
             players.ForEach(p => context.Players.Add(p));
             context.SaveChanges();
 
+            var messages = new List<Message>
+            {
+                new Message { Content = "Odwolany trening", SenderID = users[2].ID, ReceiverID = users[4].ID, SendDate = DateTime.Parse("01-02-2021 17:01")},
+                new Message { Content = "Odwolany trening", SenderID = users[2].ID, ReceiverID = users[5].ID, SendDate = DateTime.Parse("01-02-2021 17:01")},
+                new Message { Content = "Odwolany trening", SenderID = users[2].ID, ReceiverID = users[6].ID, SendDate = DateTime.Parse("01-02-2021 17:01")},
+                new Message { Content = "Nieobecność na najbliższym meczu", SenderID = users[4].ID, ReceiverID = users[2].ID, SendDate = DateTime.Parse("04-02-2021 13:51")},
+            };
+            messages.ForEach(m => context.Messages.Add(m));
+            context.SaveChanges();
 
         }
     }

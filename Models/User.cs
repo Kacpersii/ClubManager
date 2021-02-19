@@ -34,5 +34,8 @@ namespace ClubManager.Models
 
         [Display(Name = "Zdjęcie")]
         public string Photo { get; set; }
+
+        public virtual List<Message> SendedMessages { get; set; }
+        public virtual List<Message> ReceivedMessages { get; set; }
     }
 }

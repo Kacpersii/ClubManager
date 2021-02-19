@@ -173,6 +173,7 @@
     <Compile Include="Controllers\CoachController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="DAL\ClubManagerContext.cs" />
@@ -182,6 +183,7 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Manager.cs" />
+    <Compile Include="Models\Message.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Team.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -269,6 +271,8 @@
     <Content Include="Views\Coach\Details.cshtml" />
     <Content Include="Views\Coach\Edit.cshtml" />
     <Content Include="Views\Coach\Index.cshtml" />
+    <Content Include="Views\Message\Messages.cshtml" />
+    <Content Include="Views\Message\Contacts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

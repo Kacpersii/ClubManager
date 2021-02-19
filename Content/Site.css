@@ -19,8 +19,7 @@
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
-select,
-textarea {
+select {
     max-width: 280px;
 }
 a:hover {
@@ -62,4 +61,31 @@ a:hover {
 }
 .add-new-button {
     margin: 10px;
+}
+.contact {
+    margin: 20px;
+}
+.contact a{
+    padding: 15px;
+    border: solid 1px black;
+    border-radius: 20px;
+    display: inline-block;
+}
+#sendMessageForm {
+    display: none;
+    margin-bottom: 40px;
+}
+.messages-box {
+    padding: 13px 18px 5px 18px;
+    border: solid 1px;
+    border-radius: 20px;
+}
+.message-sender {
+    float: right;
+}
+.message-receiver {
+    float: left;
+}
+.message-date {
+    font-size: 12px;
 }

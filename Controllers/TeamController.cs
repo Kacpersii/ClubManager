@@ -36,7 +36,7 @@ namespace ClubManager.Controllers
         }
 
         // GET: Team/Details/5
-        [Authorize(Roles = "Admin, Manager")]
+        [Authorize(Roles = "Admin, Manager, Coach")]
         public ActionResult Details(int? id)
         {
             if (id == null)

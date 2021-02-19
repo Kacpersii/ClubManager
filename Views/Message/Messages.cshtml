@@ -1,0 +1,59 @@
+﻿@model IEnumerable<ClubManager.Models.Message>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1 class="text-center">
+    @Html.ActionLink("Wiadomości", "Contacts")
+</h1>
+
+<div class="p-30">
+    <h3 class="text-left m-20 ">
+        @if (ViewBag.Receiver.Photo != null)
+        {
+            <img src="~/Images/Photos/@ViewBag.Receiver.Photo" alt="@ViewBag.Receiver.UserName photo" class="user-photo-mini" />
+        }
+        else
+        {
+            <i class="fas fa-user user-avatar-mini"></i>
+        }
+        @ViewBag.Receiver.UserName - @ViewBag.Receiver.FirstName @ViewBag.Receiver.LastName
+    </h3>
+
+    @using (Html.BeginForm("Create", "Message", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        {
+            <input type="hidden" value="@ViewBag.Receiver.ID" name="ReceiverID" />
+            <div class="form-group">
+                <textarea name="Content" id="Content" rows="4" class="form-control" placeholder="Wiadomość..."></textarea>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Wyślij wiadomość" class="btn btn-info" />
+            </div>
+        }
+    }
+
+    <hr />
+
+    @foreach (var item in Model)
+    {
+        if (item.Sender.UserName == User.Identity.Name)
+        {
+            <div class="btn-info messages-box message-sender">
+                <p>@item.Content</p>
+                <p class="text-right message-date">@item.SendDate</p>
+            </div>
+            <div style="clear:both;"></div>
+        }
+        else
+        {
+            <div class="messages-box message-receiver">
+                <p>@item.Content</p>
+                <p class="text-right message-date">@item.SendDate</p>
+            </div>
+            <div style="clear:both;"></div>
+        }
+    }
+</div>

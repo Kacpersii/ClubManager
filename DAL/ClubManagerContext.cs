@@ -22,6 +22,7 @@ namespace ClubManager.DAL
         public DbSet<Coach> Coaches { get; set; }
         public DbSet<Player> Players { get; set; }
         public DbSet<Team> Teams { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -37,6 +38,14 @@ namespace ClubManager.DAL
 
             modelBuilder.Entity<Player>().HasRequired<Team>(p => p.Team)
                 .WithMany(t => t.Players).HasForeignKey(p => p.TeamID)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Message>().HasRequired<User>(m => m.Sender)
+                .WithMany(u => u.SendedMessages).HasForeignKey(m => m.SenderID)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Message>().HasRequired<User>(m => m.Receiver)
+                .WithMany(u => u.ReceivedMessages).HasForeignKey(m => m.ReceiverID)
                 .WillCascadeOnDelete(false);
         }
     }
