@@ -1,0 +1,28 @@
+﻿@model ClubManager.Models.Training
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        @Html.Hidden("trainingID", Model.ID)
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        @foreach (var player in Model.Team.Players)
+        {
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="playersList" value="@player.ID" /><span>@player.User.FirstName @player.User.LastName</span>
+                </label>
+            </div>
+        }
+
+        <div class="form-group">
+            <div class="m-20">
+                <input type="submit" value="Zatwierdź" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

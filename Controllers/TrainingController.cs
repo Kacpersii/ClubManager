@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using ClubManager.DAL;
 using ClubManager.Models;
+using Microsoft.Ajax.Utilities;
 
 namespace ClubManager.Controllers
 {
@@ -41,6 +42,34 @@ namespace ClubManager.Controllers
             {
                 return HttpNotFound();
             }
+            return View(training);
+        }
+
+        public ActionResult CheckAttendance(int id)
+        {
+            Training training = db.Trainings.Find(id);
+            return View(training);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CheckAttendance(int trainingID, List<int> playersList)
+        {
+            Training training = db.Trainings.Find(trainingID);
+
+            if (ModelState.IsValid)
+            {
+                training.IsAttendanceListChecked = true;
+
+                db.Teams.Single(t => t.ID == training.TeamID).Players.ForEach(p => db.Attendances.Add(new Attendance { PlayerID = p.ID, TrainingID = trainingID, WasPresent = false })); ;
+                db.SaveChanges();
+
+                playersList.ForEach(p => db.Attendances.Single(a => a.PlayerID == p && a.TrainingID == trainingID).WasPresent = true);
+                db.SaveChanges();
+
+                return RedirectToAction("Details", new { id = trainingID });
+            }
+
             return View(training);
         }
 

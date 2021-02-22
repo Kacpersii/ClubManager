@@ -63,10 +63,6 @@ namespace ClubManager.Controllers
                 if (exercisesList != null && exercisesList.Count > 0)
                 {
                     trainingOutline.TrainingOutlinesExercises = new List<TrainingOutlinesExercise>();
-                    
-                    //exercisesList.ForEach(e => trainingOutline.TrainingOutlinesExercises.Add(db.Exercises.Find(e)));
-                    //var tOE = new List<TrainingOutlinesExercise>();
-                    
                     exercisesList.ForEach(e => db.TrainingOutlinesExercises.Add(new TrainingOutlinesExercise { ExerciseID = e, TrainingOutlineID = trainingOutline.ID }));
                 }
                 db.SaveChanges();

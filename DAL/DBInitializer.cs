@@ -159,8 +159,8 @@ namespace ClubManager.DAL
 
             var trainings = new List<Training>
             {
-                new Training { Date = DateTime.Parse("16-02-2021 18:00"), Place = "Hala sportowa", TeamID = teams[0].ID, TrainingOutlineID = trainingOutlines[0].ID },
-                new Training { Date = DateTime.Parse("18-02-2021 18:00"), Place = "Hala sportowa", TeamID = teams[0].ID, TrainingOutlineID = trainingOutlines[0].ID },
+                new Training { Date = DateTime.Parse("16-02-2021 18:00"), Place = "Hala sportowa", TeamID = teams[0].ID, TrainingOutlineID = trainingOutlines[0].ID, IsAttendanceListChecked = true },
+                new Training { Date = DateTime.Parse("18-02-2021 18:00"), Place = "Hala sportowa", TeamID = teams[0].ID, TrainingOutlineID = trainingOutlines[0].ID, IsAttendanceListChecked = true },
                 new Training { Date = DateTime.Parse("23-02-2021 18:00"), Place = "Hala sportowa", TeamID = teams[0].ID, TrainingOutlineID = trainingOutlines[1].ID },
                 new Training { Date = DateTime.Parse("25-02-2021 18:00"), Place = "Hala sportowa", TeamID = teams[0].ID, TrainingOutlineID = trainingOutlines[1].ID },
             };

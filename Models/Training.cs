@@ -17,6 +17,7 @@ namespace ClubManager.Models
         public string Place { get; set; }
         public int TrainingOutlineID { get; set; }
         public int TeamID { get; set; }
+        public bool IsAttendanceListChecked { get; set; }
 
         public virtual TrainingOutline TrainingOutline { get; set; }
         public virtual Team Team { get; set; }
