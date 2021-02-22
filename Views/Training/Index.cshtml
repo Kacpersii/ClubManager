@@ -1,0 +1,19 @@
+﻿@model IEnumerable<ClubManager.Models.Training>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1 class="text-center m-30">Treningi</h1>
+
+<p>
+    @if (User.IsInRole("Admin") || User.IsInRole("Coach"))
+    {
+        @Html.ActionLink("Dodaj nowy trening", "Create", new { }, new { @class = "btn btn-success add-new-button" })
+
+    }
+    @Html.ActionLink("Odbyte treningi", "FinishedTrainings", new { }, new { @class = "btn btn-primary add-new-button" })
+    @Html.ActionLink("Konspekty treningowe", "Index", "TrainingOutline", new { }, new { @class = "btn btn-primary add-new-button" })
+</p>
+
+@Html.Partial("_TrainingsList")

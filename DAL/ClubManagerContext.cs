@@ -27,6 +27,9 @@ namespace ClubManager.DAL
         public DbSet<TrainingOutline> TrainingOutlines { get; set; }
         public DbSet<TrainingOutlinesExercise> TrainingOutlinesExercises { get; set; }
 
+        public DbSet<Training> Trainings { get; set; }
+        public DbSet<Attendance> Attendances { get; set; }
+
         public DbSet<Message> Messages { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -51,6 +54,10 @@ namespace ClubManager.DAL
 
             modelBuilder.Entity<Message>().HasRequired<User>(m => m.Receiver)
                 .WithMany(u => u.ReceivedMessages).HasForeignKey(m => m.ReceiverID)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Training>().HasRequired<Team>(tr => tr.Team)
+                .WithMany()
                 .WillCascadeOnDelete(false);
         }
     }

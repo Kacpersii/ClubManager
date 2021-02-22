@@ -177,6 +177,7 @@
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
+    <Compile Include="Controllers\TrainingController.cs" />
     <Compile Include="Controllers\TrainingOutlineController.cs" />
     <Compile Include="DAL\ClubManagerContext.cs" />
     <Compile Include="DAL\DBInitializer.cs" />
@@ -184,6 +185,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Attendance.cs" />
     <Compile Include="Models\Exercise.cs" />
     <Compile Include="Models\Manager.cs" />
     <Compile Include="Models\Message.cs" />
@@ -292,6 +294,13 @@
     <Content Include="Views\TrainingOutline\Details.cshtml" />
     <Content Include="Views\TrainingOutline\Edit.cshtml" />
     <Content Include="Views\TrainingOutline\Index.cshtml" />
+    <Content Include="Views\Training\Create.cshtml" />
+    <Content Include="Views\Training\Delete.cshtml" />
+    <Content Include="Views\Training\Details.cshtml" />
+    <Content Include="Views\Training\Edit.cshtml" />
+    <Content Include="Views\Training\Index.cshtml" />
+    <Content Include="Views\Training\FinishedTrainings.cshtml" />
+    <Content Include="Views\Training\_TrainingsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

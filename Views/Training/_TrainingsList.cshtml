@@ -1,0 +1,11 @@
+﻿@model IEnumerable<ClubManager.Models.Training>
+
+@foreach (var item in Model)
+{
+    <div class="jumbotron p-20">
+        <h2><i class="fas fa-calendar"></i> @Html.ActionLink(item.Date.ToString(), "Details", new { id = item.ID })</h2>
+        <p>@item.TrainingOutline.Name</p>
+        <p>Drużyna: @item.Team.Name</p>
+        <p>Miejsce: @item.Place</p>
+    </div>
+}

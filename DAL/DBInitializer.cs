@@ -157,6 +157,30 @@ namespace ClubManager.DAL
             trainingOutlinesExercises.ForEach(t => context.TrainingOutlinesExercises.Add(t));
             context.SaveChanges();
 
+            var trainings = new List<Training>
+            {
+                new Training { Date = DateTime.Parse("16-02-2021 18:00"), Place = "Hala sportowa", TeamID = teams[0].ID, TrainingOutlineID = trainingOutlines[0].ID },
+                new Training { Date = DateTime.Parse("18-02-2021 18:00"), Place = "Hala sportowa", TeamID = teams[0].ID, TrainingOutlineID = trainingOutlines[0].ID },
+                new Training { Date = DateTime.Parse("23-02-2021 18:00"), Place = "Hala sportowa", TeamID = teams[0].ID, TrainingOutlineID = trainingOutlines[1].ID },
+                new Training { Date = DateTime.Parse("25-02-2021 18:00"), Place = "Hala sportowa", TeamID = teams[0].ID, TrainingOutlineID = trainingOutlines[1].ID },
+            };
+            trainings.ForEach(t => context.Trainings.Add(t));
+            context.SaveChanges();
+
+            var attendances = new List<Attendance>
+            {
+                new Attendance { PlayerID = players[0].ID, TrainingID = trainings[0].ID, WasPresent = true },
+                new Attendance { PlayerID = players[1].ID, TrainingID = trainings[0].ID, WasPresent = true },
+                new Attendance { PlayerID = players[2].ID, TrainingID = trainings[0].ID, WasPresent = true },
+                new Attendance { PlayerID = players[3].ID, TrainingID = trainings[0].ID, WasPresent = false },
+                new Attendance { PlayerID = players[0].ID, TrainingID = trainings[1].ID, WasPresent = true },
+                new Attendance { PlayerID = players[1].ID, TrainingID = trainings[1].ID, WasPresent = true },
+                new Attendance { PlayerID = players[2].ID, TrainingID = trainings[1].ID, WasPresent = false },
+                new Attendance { PlayerID = players[3].ID, TrainingID = trainings[1].ID, WasPresent = true },
+            };
+            attendances.ForEach(a => context.Attendances.Add(a));
+            context.SaveChanges();
+
         }
     }
 }

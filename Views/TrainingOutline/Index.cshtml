@@ -6,12 +6,14 @@
 
 <h1 class="text-center m-30">Konspekty treningów</h1>
 
-@if (User.IsInRole("Admin") || User.IsInRole("Manager") || User.IsInRole("Coach"))
-{
-    <p>
+<p>
+    @if (User.IsInRole("Admin") || User.IsInRole("Manager") || User.IsInRole("Coach"))
+    {
         @Html.ActionLink("Dodaj konspekt", "Create", new { }, new { @class = "btn btn-success add-new-button" })
-    </p>
-}
+
+    }
+    @Html.ActionLink("Treningi", "Index", "Training", new { }, new { @class = "btn btn-primary add-new-button" })
+</p>
 
 <table class="table table-hover">
     <tr>

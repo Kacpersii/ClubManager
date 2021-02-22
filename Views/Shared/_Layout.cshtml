@@ -50,7 +50,7 @@
                     }
                     else if (User.IsInRole("Coach") || User.IsInRole("Player"))
                     {
-                        <li>@Html.ActionLink("Moja drużyna", "MyTeam", "Team")</li>
+                        <li>@Html.ActionLink("Drużyna", "MyTeam", "Team")</li>
                     }
 
                     @if (User.IsInRole("Admin"))
@@ -86,7 +86,7 @@
 
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Treningi", "Index", "TrainingOutline")</li>
+                        <li>@Html.ActionLink("Treningi", "Index", "Training")</li>
                     }
 
                     @if (User.IsInRole("Manager") || User.IsInRole("Coach") || User.IsInRole("Player"))
