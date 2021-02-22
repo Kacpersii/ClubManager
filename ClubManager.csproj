@@ -171,11 +171,13 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClubController.cs" />
     <Compile Include="Controllers\CoachController.cs" />
+    <Compile Include="Controllers\ExerciseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MessageController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
+    <Compile Include="Controllers\TrainingOutlineController.cs" />
     <Compile Include="DAL\ClubManagerContext.cs" />
     <Compile Include="DAL\DBInitializer.cs" />
     <Compile Include="Global.asax.cs">
@@ -185,6 +187,8 @@
     <Compile Include="Models\Exercise.cs" />
     <Compile Include="Models\Manager.cs" />
     <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\Training.cs" />
+    <Compile Include="Models\TrainingOutlinesExercise.cs" />
     <Compile Include="Models\TrainingOutline.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Team.cs" />
@@ -205,6 +209,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\ExerciseSchemas\schemat1.png" />
+    <Content Include="Images\ExerciseSchemas\schemat2.png" />
+    <Content Include="Images\ExerciseSchemas\schemat3.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -275,6 +282,16 @@
     <Content Include="Views\Coach\Index.cshtml" />
     <Content Include="Views\Message\Messages.cshtml" />
     <Content Include="Views\Message\Contacts.cshtml" />
+    <Content Include="Views\Exercise\Create.cshtml" />
+    <Content Include="Views\Exercise\Delete.cshtml" />
+    <Content Include="Views\Exercise\Details.cshtml" />
+    <Content Include="Views\Exercise\Edit.cshtml" />
+    <Content Include="Views\Exercise\Index.cshtml" />
+    <Content Include="Views\TrainingOutline\Create.cshtml" />
+    <Content Include="Views\TrainingOutline\Delete.cshtml" />
+    <Content Include="Views\TrainingOutline\Details.cshtml" />
+    <Content Include="Views\TrainingOutline\Edit.cshtml" />
+    <Content Include="Views\TrainingOutline\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

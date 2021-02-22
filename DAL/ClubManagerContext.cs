@@ -25,6 +25,7 @@ namespace ClubManager.DAL
 
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<TrainingOutline> TrainingOutlines { get; set; }
+        public DbSet<TrainingOutlinesExercise> TrainingOutlinesExercises { get; set; }
 
         public DbSet<Message> Messages { get; set; }
 

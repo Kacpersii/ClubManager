@@ -1,0 +1,35 @@
+﻿@model ClubManager.Models.TrainingOutline
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div>
+    <h2 class="text-center m-20">@Model.Name</h2>
+
+    <div>
+
+        <table class="table table-hover">
+            <tr>
+                <th>
+                    Ćwiczenia
+                </th>
+            </tr>
+
+            @foreach (var item in Model.TrainingOutlinesExercises)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.Exercise.Name, "Details", "Exercise", new { id = item.ExerciseID })
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+
+</div>
+<p>
+    @Html.ActionLink("Powrót", "Index")
+</p>

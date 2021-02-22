@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ClubManager.Models.TrainingOutline>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1 class="text-center m-30">Konspekty treningów</h1>
+
+@if (User.IsInRole("Admin") || User.IsInRole("Manager") || User.IsInRole("Coach"))
+{
+    <p>
+        @Html.ActionLink("Dodaj konspekt", "Create", new { }, new { @class = "btn btn-success add-new-button" })
+    </p>
+}
+
+<table class="table table-hover">
+    <tr>
+        <th>
+            Nazwa
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Name, "Details", new { id = item.ID })
+            </td>
+            <td class="text-center">
+                @if (User.IsInRole("Admin") || item.Author.UserName == User.Identity.Name)
+                {
+                    @Html.ActionLink(" ", "Edit", new { id = item.ID }, new { @class = "fas fa-edit admin-panel-icon admin-panel-icon-edit" })
+                    @Html.ActionLink(" ", "Delete", new { id = item.ID }, new { @class = "fas fa-trash admin-panel-icon admin-panel-icon-delete" })
+                }
+            </td>
+        </tr>
+    }
+
+</table>

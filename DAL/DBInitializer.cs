@@ -136,9 +136,25 @@ namespace ClubManager.DAL
 
             var trainingOutlines = new List<TrainingOutline>
             {
-                new TrainingOutline { Name = "Trening utrzymania przy piłce", AuthorID = users[2].ID, Exercises = new List<Exercise>{ exercises[0], exercises[3], exercises[5], exercises[1], exercises[4] } },
+                new TrainingOutline { Name = "Trening utrzymania przy piłce", AuthorID = users[2].ID },
+                new TrainingOutline { Name = "Trening na utrzymanie przy piłce 2", AuthorID = users[2].ID },
             };
             trainingOutlines.ForEach(o => context.TrainingOutlines.Add(o));
+            context.SaveChanges();
+
+            var trainingOutlinesExercises = new List<TrainingOutlinesExercise>
+            {
+                new TrainingOutlinesExercise { TrainingOutlineID = trainingOutlines[0].ID, ExerciseID = exercises[0].ID },
+                new TrainingOutlinesExercise { TrainingOutlineID = trainingOutlines[0].ID, ExerciseID = exercises[3].ID },
+                new TrainingOutlinesExercise { TrainingOutlineID = trainingOutlines[0].ID, ExerciseID = exercises[5].ID },
+                new TrainingOutlinesExercise { TrainingOutlineID = trainingOutlines[0].ID, ExerciseID = exercises[1].ID },
+                new TrainingOutlinesExercise { TrainingOutlineID = trainingOutlines[0].ID, ExerciseID = exercises[4].ID },
+                new TrainingOutlinesExercise { TrainingOutlineID = trainingOutlines[1].ID, ExerciseID = exercises[0].ID },
+                new TrainingOutlinesExercise { TrainingOutlineID = trainingOutlines[1].ID, ExerciseID = exercises[1].ID },
+                new TrainingOutlinesExercise { TrainingOutlineID = trainingOutlines[1].ID, ExerciseID = exercises[4].ID },
+                new TrainingOutlinesExercise { TrainingOutlineID = trainingOutlines[1].ID, ExerciseID = exercises[2].ID },
+            };
+            trainingOutlinesExercises.ForEach(t => context.TrainingOutlinesExercises.Add(t));
             context.SaveChanges();
 
         }

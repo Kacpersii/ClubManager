@@ -63,7 +63,7 @@
                     }
                     else if (User.IsInRole("Coach"))
                     {
-                        <li>@Html.ActionLink("Mój profil trenera", "MyProfile", "Coach")</li>
+                        <li>@Html.ActionLink("Profil trenera", "MyProfile", "Coach")</li>
                     }
 
                     @if (User.IsInRole("Admin"))
@@ -76,7 +76,17 @@
                     }
                     else if (User.IsInRole("Player"))
                     {
-                        <li>@Html.ActionLink("Mój profil zawodnika", "MyProfile", "Player")</li>
+                        <li>@Html.ActionLink("Profil zawodnika", "MyProfile", "Player")</li>
+                    }
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Ćwiczenia", "Index", "Exercise")</li>
+                    }
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Treningi", "Index", "TrainingOutline")</li>
                     }
 
                     @if (User.IsInRole("Manager") || User.IsInRole("Coach") || User.IsInRole("Player"))

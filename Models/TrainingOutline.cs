@@ -14,6 +14,6 @@ namespace ClubManager.Models
         public int AuthorID { get; set; }
 
         public virtual User Author { get; set; }
-        public virtual List<Exercise> Exercises { get; set; }
+        public virtual List<TrainingOutlinesExercise> TrainingOutlinesExercises { get; set; }
     }
 }

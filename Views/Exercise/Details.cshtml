@@ -1,0 +1,25 @@
+﻿@model ClubManager.Models.Exercise
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div>
+    <h2 class="text-center m-20">@Model.Name</h2>
+
+    <p class="m-20">
+        @Html.DisplayFor(model => model.Description)
+    </p>
+
+    <p class="m-20">
+        Liczba zawodników: @Html.DisplayFor(model => model.NumberOfPlayers)
+    </p>
+
+    <p class="m-20">
+        Czas wykonywania: @Html.DisplayFor(model => model.ExecutionTime) min
+    </p>
+    @if (Model.ExerciseScheme != null && Model.ExerciseScheme != "")
+    {
+        <img src="~/Images/ExerciseSchemas/@Model.ExerciseScheme" alt="@Model.Name logo" class="img-responsive center-block" />
+    }
+</div>
