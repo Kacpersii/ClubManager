@@ -1,5 +1,8 @@
 ﻿@model ClubManager.Models.Training
 
+<h1>Lista obecności na treningu @Model.Date</h1>
+<h3>Drużyna: @Model.Team.Name</h3>
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -21,7 +24,7 @@
 
         <div class="form-group">
             <div class="m-20">
-                <input type="submit" value="Zatwierdź" class="btn btn-default" />
+                <input type="submit" value="Zatwierdź" class="btn btn-success" />
             </div>
         </div>
     </div>

@@ -34,7 +34,6 @@ namespace ClubManager.Controllers
         }
 
         // GET: Club
-        [Authorize(Roles = "Admin")]
         public ActionResult Index()
         {
             return View(db.Clubs.ToList());
@@ -110,42 +109,35 @@ namespace ClubManager.Controllers
             return View();
         }
 
-        // POST: Club/Create
-        // Aby zapewnić ochronę przed atakami polegającymi na przesyłaniu dodatkowych danych, włącz określone właściwości, z którymi chcesz utworzyć powiązania.
-        // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Club club, int? userID)
         {
             if (ModelState.IsValid)
             {
-
                 HttpPostedFileBase file = Request.Files["Logo"];
                 if (file != null && file.ContentLength > 0)
                 {
                     club.Logo = System.Guid.NewGuid().ToString() + file.FileName;
                     file.SaveAs(HttpContext.Server.MapPath("~/Images/Logos/") + club.Logo);
                 }
-
                 db.Clubs.Add(club);
                 db.SaveChanges();
 
-                User user;
+                User user; 
+                Manager manager;
                 if (User.IsInRole("Admin"))
                 {
                     user = db.Users.Single(u => u.ID == userID);
-                    Manager createdManager = new Manager { UserID = (int)userID, ClubID = club.ID };
-                    db.Managers.Add(createdManager);
-                    db.SaveChanges();
-
+                    manager = new Manager { UserID = (int)userID, ClubID = club.ID };
                 } 
                 else
                 {
                     user = db.Users.Single(u => u.UserName == User.Identity.Name);
-                    Manager manager = new Manager { UserID = user.ID, ClubID = club.ID };
-                    db.Managers.Add(manager);
-                    db.SaveChanges();
+                    manager = new Manager { UserID = user.ID, ClubID = club.ID };
                 }
+                db.Managers.Add(manager);
+                db.SaveChanges();
 
                 var user1 = UserManager.FindByName(user.UserName);
                 UserManager.AddToRole(user1.Id, "Manager");
@@ -158,13 +150,10 @@ namespace ClubManager.Controllers
                 else
                 {
                     return RedirectToAction("ManagersClub");
-                }
-                    
+                }               
             }
 
-            var users = db.Users
-                .Where(u => !db.Managers.Any(m => m.UserID == u.ID))
-                .Select(u => new { ID = u.ID, Name = u.UserName });
+            var users = db.Users.Where(u => !db.Managers.Any(m => m.UserID == u.ID)).Select(u => new { ID = u.ID, Name = u.UserName });
             ViewBag.userID = new SelectList(users, "ID", "Name");
 
             return View(club);

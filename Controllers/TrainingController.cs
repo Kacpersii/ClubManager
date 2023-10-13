@@ -56,21 +56,22 @@ namespace ClubManager.Controllers
         public ActionResult CheckAttendance(int trainingID, List<int> playersList)
         {
             Training training = db.Trainings.Find(trainingID);
+            training.IsAttendanceListChecked = true;
 
-            if (ModelState.IsValid)
+            Team team = db.Teams.Single(t => t.ID == training.TeamID);
+            if (team.Players.Count > 0)
             {
-                training.IsAttendanceListChecked = true;
-
-                db.Teams.Single(t => t.ID == training.TeamID).Players.ForEach(p => db.Attendances.Add(new Attendance { PlayerID = p.ID, TrainingID = trainingID, WasPresent = false })); ;
+                team.Players.ForEach(p => db.Attendances.Add(new Attendance { PlayerID = p.ID, TrainingID = trainingID, WasPresent = false }));
                 db.SaveChanges();
-
-                playersList.ForEach(p => db.Attendances.Single(a => a.PlayerID == p && a.TrainingID == trainingID).WasPresent = true);
-                db.SaveChanges();
-
-                return RedirectToAction("Details", new { id = trainingID });
             }
 
-            return View(training);
+            if(playersList.Count > 0)
+            {
+                playersList.ForEach(p => db.Attendances.Single(a => a.PlayerID == p && a.TrainingID == trainingID).WasPresent = true);
+                db.SaveChanges();
+            }
+            
+            return RedirectToAction("Details", new { id = trainingID });
         }
 
         // GET: Training/Create

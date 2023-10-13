@@ -48,9 +48,7 @@ namespace ClubManager.Controllers
             return View(trainingOutline);
         }
 
-        // POST: TrainingOutline/Create
-        // Aby zapewnić ochronę przed atakami polegającymi na przesyłaniu dodatkowych danych, włącz określone właściwości, z którymi chcesz utworzyć powiązania.
-        // Aby uzyskać więcej szczegółów, zobacz https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(TrainingOutline trainingOutline, List<int> exercisesList)
@@ -63,7 +61,8 @@ namespace ClubManager.Controllers
                 if (exercisesList != null && exercisesList.Count > 0)
                 {
                     trainingOutline.TrainingOutlinesExercises = new List<TrainingOutlinesExercise>();
-                    exercisesList.ForEach(e => db.TrainingOutlinesExercises.Add(new TrainingOutlinesExercise { ExerciseID = e, TrainingOutlineID = trainingOutline.ID }));
+                    exercisesList.ForEach(e => db.TrainingOutlinesExercises
+                        .Add(new TrainingOutlinesExercise { ExerciseID = e, TrainingOutlineID = trainingOutline.ID }));
                 }
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -28,7 +28,7 @@ namespace ClubManager.Controllers
             return View(contacts);
         }
 
-        // GET: Message/Details/5
+
         public ActionResult Messages(int? id)
         {
             if (id == null)

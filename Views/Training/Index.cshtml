@@ -7,7 +7,7 @@
 <h1 class="text-center m-30">Treningi</h1>
 
 <p>
-    @if (User.IsInRole("Admin") || User.IsInRole("Coach"))
+    @if (User.IsInRole("Admin") || User.IsInRole("Manager") || User.IsInRole("Coach"))
     {
         @Html.ActionLink("Dodaj nowy trening", "Create", new { }, new { @class = "btn btn-success add-new-button" })
 

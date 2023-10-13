@@ -79,12 +79,12 @@
                         <li>@Html.ActionLink("Profil zawodnika", "MyProfile", "Player")</li>
                     }
 
-                    @if (User.Identity.IsAuthenticated)
+                    @if (User.IsInRole("Admin") || User.IsInRole("Manager") || User.IsInRole("Coach") || User.IsInRole("Player"))
                     {
                         <li>@Html.ActionLink("Ćwiczenia", "Index", "Exercise")</li>
                     }
 
-                    @if (User.Identity.IsAuthenticated)
+                    @if (User.IsInRole("Admin") || User.IsInRole("Manager") || User.IsInRole("Coach") || User.IsInRole("Player"))
                     {
                         <li>@Html.ActionLink("Treningi", "Index", "Training")</li>
                     }

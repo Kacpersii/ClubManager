@@ -89,3 +89,6 @@ a:hover {
 .message-date {
     font-size: 12px;
 }
+.inline-block {
+    display: inline-block;
+}
