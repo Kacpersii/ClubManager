@@ -1,0 +1,2 @@
+# ClubManager
+ClubManager - System supporting the management of an amateur football club. Its an application written using technologies such as .Net Framework, Entity Framework, LINQ, Bootstrap, GIT. This application supports the management of a football club. It targets different types of users, each of them has specific functions for their role. The system allows you to create new club and add its members, plan training sessions and create their outlines, check the attendance list and send messages between club employees.
